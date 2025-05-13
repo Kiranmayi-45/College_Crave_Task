@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { auth } from '../firebaseConfig';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
 
-interface AuthModalProps {
+type AuthModalProps = {
   open: boolean;
   onClose: () => void;
   setUser: (user: any) => void;
-}
+};
 
-const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
+const AuthModal = ({ open, onClose, setUser }: AuthModalProps) => {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +22,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+
     try {
       if (mode === 'login') {
         const res = await signInWithEmailAndPassword(auth, email, password);
@@ -28,8 +32,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
         setUser(res.user);
       }
       onClose();
-    } catch (e: any) {
-      setError(e.message);
+    } catch (err: any) {
+      setError(err.message || 'An error occurred.');
     } finally {
       setLoading(false);
     }
@@ -40,7 +44,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-40">
       <div className="bg-white rounded-xl w-[340px] p-7 flex flex-col shadow-lg relative">
-        <button className="absolute right-2 top-2 text-gray-500" onClick={onClose}>×</button>
+        <button className="absolute right-2 top-2 text-gray-500" onClick={onClose}>
+          ×
+        </button>
         <h2 className="font-bold text-xl mb-3 text-blue-700 text-center">
           {mode === 'login' ? 'Login' : 'Sign Up'}
         </h2>
@@ -51,7 +57,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
             placeholder="Email"
             className="border p-2 rounded w-full"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             autoFocus
           />
           <input
@@ -60,7 +66,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
             placeholder="Password"
             className="border p-2 rounded w-full"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button
             type="submit"
@@ -88,5 +94,3 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, setUser }) => {
 };
 
 export default AuthModal;
-
-

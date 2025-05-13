@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-interface User{name:string;email:string;}
 
-const AuthModal :React.FC<ModalProps> ({ open, onClose, user }): { open: boolean; onClose: () => void; user:User; } => {
+const AuthModal = ({ open, onClose, setUser }: { open: boolean, onClose: () => void, setUser: (user: any) => void }) => {
   const [mode, setMode] = useState<'login'|'signup'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,3 +53,4 @@ const AuthModal :React.FC<ModalProps> ({ open, onClose, user }): { open: boolean
 };
 
 export default AuthModal;
+

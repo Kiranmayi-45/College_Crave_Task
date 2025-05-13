@@ -9,6 +9,7 @@ type AuthModalProps = {
   open: boolean;
   onClose: () => void;
   setUser: (user: any) => void;
+  user: any;
 };
 
 const AuthModal = ({ open, onClose, setUser }: AuthModalProps) => {
@@ -22,7 +23,6 @@ const AuthModal = ({ open, onClose, setUser }: AuthModalProps) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       if (mode === 'login') {
         const res = await signInWithEmailAndPassword(auth, email, password);
@@ -32,8 +32,8 @@ const AuthModal = ({ open, onClose, setUser }: AuthModalProps) => {
         setUser(res.user);
       }
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'An error occurred.');
+    } catch (e: any) {
+      setError(e.message);
     } finally {
       setLoading(false);
     }

@@ -8,7 +8,7 @@ const Navbar = ({ user, onLogin }: { user: any, onLogin: () => void }) => (
       <span className="font-bold text-xl text-blue-700">Logo</span>
       <ul className="flex gap-6 ml-8 font-medium">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/old-acs">Old AC Listing</Link></li>
+        <li><Link to="/old-acs">Old AC Listing</Link></li> 
         <li><Link to="/pricing">Pricing</Link></li>
       </ul>
     </div>

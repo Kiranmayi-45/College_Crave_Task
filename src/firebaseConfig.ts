@@ -8,7 +8,8 @@ const firebaseConfig = {
   apiKey: "AIzaSyB9_3wbS91WfsWIRWzIlOZLg6WeaLN95z4",
   authDomain: "ac-wallah.firebaseapp.com",
   projectId: "ac-wallah",
-  storageBucket: "ac-wallah.firebasestorage.app",
+  //storageBucket: "ac-wallah.firebasestorage.app",
+  storageBucket: "ac-wallah.appspot.com",
   messagingSenderId: "470887823767",
   appId: "1:470887823767:web:309f7814efefb89d762cd2"
 };
